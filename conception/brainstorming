@@ -1,0 +1,106 @@
+Vente (product)
+    ++ Demande de pro format 
+        + formulaire
+    ++ Bon de commande
+        + refa mety ilay pro format
+        + formualaire (need of client)
+            + tsy azo annulena intsony ilay vente
+    ++ Bon de sortie
+        + Avoka ilay produit 
+        + mihena ny stock
+    ++ Bon de livraison
+        + facturation 
+            + voray ilay vola 
+                + debit caisse
+
+
+Achat (product)
+    ++ Demande achat materiel
+        + makany am deba oe ividy an zao ... 
+            + manaiky ou non ny deba (ETAT)
+        + makany am finance oe amoka x amount , fa misy anzao ve ao ?
+            + si oui(ETAT), dia mitohy 
+    ++ Demande de pro format / bon de commande
+        + formulaire
+    ++ mila jerena ny stock oe misy an ilay produit ho vidina ve ao
+        - raha misy d miteny oe misy ny stock  
+            - ahena ny stock 
+            - tsy manao facturation
+                - tsy manena vola ao am caisse
+        - raha tsisy ny stock
+    ++ Bon entrée
+        - mampiditra stock
+    ++ Bon de reception 
+        - manena vola ao am caisse 
+
+
+Valorisation stock
+    CMUP
+        - refa tsy misy PU dia tokony misy montant sy qte
+            - dcp PU = montant / qte
+        - refa misy d zay zany
+    LIFO sy FIFO 
+        - id no rank akana azy
+
+
+Employee
+    - Status 
+
+Vampire 
+    - olona ray manao tache rehetra
+    - za manao demande , manao facture ... 
+Paire (ATAO PAIRE)
+    - Olona bdb manao tache
+    - misy manao demande, facture
+
+
+/*---------------------------------------- */
+Etat ??
+    - tracabilité
+    - Facture misy link am demande
+
+Vente 
+    pro format
+    bon de sortie (declencher fivoahana anah stock)
+        -> hisy entana ivoka ao am stock
+    bon de reception (declencher fampidirina stock)
+        -> voray an'ny lay client ilay izy
+    bon de livraison 
+
+
+Questionnaire apetraka am bouton ??
+    - stock mihena nefa tsisy bon de sortie
+    - bon de sortie => demande
+    - demande => bon de commande
+    - misy ref bon de comande ny bon de sortie
+    - mvt stock 
+        - au moins mametraka question ...
+            - efa nandefa mail tam deba ve ??
+            
+validation paiement
+    - facture
+    - bon de reception tany am azy 
+        - misy zavatra livrena
+            - misy zavatra commandé 
+                - misy besoin qlq part
+
+Achat et Vente 
+Gestion de stock
+
+
+achat de departement ? 
+    - Stylo tsy mahazo miotra an'zao ??
+
+methode de sortie pour un produit (fifo, lifo) iray ihany ny methode hatram farany
+
+
+centralise ao am chef departement ny demande
+    - all demands
+    - filter demande
+
+
+Avy am departement A mangataka demande particulier 
+    - jerena ny stock raha misy
+        - si oui, paekarina ilay entana
+        - si non
+            - manao achat  
