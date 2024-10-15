@@ -3,7 +3,7 @@ Vente (product)
         + formulaire
     ++ Bon de commande
         + refa mety ilay pro format
-        + formualaire (need of client)
+        + formulaire (need of client)
             + tsy azo annulena intsony ilay vente
     ++ Bon de sortie
         + Avoka ilay produit 
@@ -104,3 +104,10 @@ Avy am departement A mangataka demande particulier
         - si oui, paekarina ilay entana
         - si non
             - manao achat  
+
+
+Controlle internes
+    - neccessaire pour la validation d'un processus
+        - ETAT : 
+            -> Accepted
+            -> Suspended

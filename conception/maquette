@@ -1,0 +1,31 @@
+# PROFORMAT ======================================= #
+
+### **PROFORMA INVOICE**
+
+**Seller Information:**
+Handbag Haven  
+123 Fashion Street  
+City, State, ZIP Code  
+Phone: (123) 456-7890  
+Email: contact@handbaghaven.com
+
+**Buyer Information:**
+Jane Doe  
+789 Style Avenue  
+City, State, ZIP Code  
+Phone: (987) 654-3210  
+Email: janedoe@email.com
+
+**Invoice Date:** October 15, 2024  
+**Proforma Invoice Number:** PHH1024
+
+---
+
+| **Item Description**      | **Quantity** | **Unit Price** | **Total Price** |
+|---------------------------|--------------|----------------|-----------------|
+| Classic Leather Handbag    | 2            | $100.00        | $200.00         |
+| Designer Tote Bag          | 1            | $150.00        | $150.00         |
+| Vintage Crossbody Bag      | 3            | $75.00         | $225.00         |
+| **Subtotal**               |              |                | **$575.00**     |
+| Shipping (Standard)        |              |                | $25.00          |
+| **Total Amount**           |              |                | **$600.00**     |

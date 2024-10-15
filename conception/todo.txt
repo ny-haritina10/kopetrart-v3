@@ -1,0 +1,42 @@
+ACHAT
+
+- Demande.create()
+- Manager.validate(Demande)
+- if Stock.contains(Demande)	
+	Stock.withdraw(Demande)
+- else
+	await askProformatFrom(Provider)
+- BonDeCommande.createFrom(Proformat, Demande)
+- Manager.validate(BonDeCommande)
+- BonDeCommande.sendTo(Provider)
+- await getBonDeLivraisonFrom(Provider)
+- BonDeReception.createFor(Provider)
+- Manager.validate(BonDeReceiption)
+- BonDeReception.send()
+- await getFactureFrom(Provider)
+- Facture.preparePayementFor(Provider)
+- Manager.validate(FacturePayement)
+- Stock.store(BonDeReceception)
+- Stock.withdraw(Demande)
+
+
+
+VENTE
+
+- await hasProformatAsked()
+- Proformat.create()
+- Manager.validate(Proformat)
+- Proformat.sendTo(Customer)
+- await getBonDeCommandeFrom(Customer)
+- Demande.create(BonDeCommande)
+- ... cf ACHAT
+- BonDeLivraison.createFor(Customer)
+- Manager.validate(BonDeLivraison)
+- BonDeLivraison.send()
+- await getBonDeReceptionFrom(Customer)
+- Facture.createFrom(BonDeReception)
+- Manager.validate(Facture)
+- Facture.sendTo(Customer)
+- await getFacturePayementFrom(Customer)
+- Manager.validate(FacturePayement)
+- Cash.register(FaturePayment)

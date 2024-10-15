@@ -10,6 +10,8 @@ use App\Http\Controllers\Misc\ExpenseController;
 use App\Http\Controllers\Misc\ProductController;
 use App\Http\Controllers\Misc\SectionController;
 use App\Http\Controllers\Misc\UnitController;
+use App\Http\Controllers\Role\RoleController;
+
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ CostCenterDetailController::class, 'index' ]);
@@ -25,3 +27,4 @@ Route::resource('/unit', UnitController::class);
 Route::resource('/center', CenterController::class);
 Route::resource('/product', ProductController::class);
 Route::resource('/expense', ExpenseController::class);
+Route::resource('/roles', RoleController::class);

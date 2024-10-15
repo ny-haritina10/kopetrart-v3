@@ -4,6 +4,14 @@
     <div class="fx__navbar-brand"> <h1> <a href="/"> Kopetrart </a></h1> </div>
 
     <div class="fx__navbar-section">
+        <h3 class="fx__navbar-subtitle"> Admin </h3>
+        <ul class="fx__navbar-list">
+            <x-navbar.item href="/roles" :active="$active"> <i class="fa-solid fa-table"></i> Role </x-navbar.item>
+        </ul>
+    </div>
+
+
+    <div class="fx__navbar-section">
         <h3 class="fx__navbar-subtitle"> Général </h3>
         <ul class="fx__navbar-list">
             <x-navbar.item href="/exercice" :active="$active"> <i class="fa-solid fa-table"></i> Ecriture </x-navbar.item>

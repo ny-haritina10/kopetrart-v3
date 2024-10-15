@@ -166,7 +166,43 @@
         - index(): all functions in Model\CoutModel -> View\cout
 
 
+/* TO DO SUJET II ==================================== */
 
-... Ra mbola manam-pton
-- $date_min, $date_max CoutModel, Charge
-- Mulitple product
+. Controles Internes
+    - Table: 
+        - Role: 
+            - id
+            - label
+
+        - Login:
+            - id
+            - id_role [FK]
+            - email
+            - password
+
+    - Model: 
+        - Role
+            - CRUD 
+        - Login  
+            - check(email, password)
+                - encrypt password
+
+    - View: 
+        - Login form (email, password)
+        - Form validation 
+        - Error handling
+        - Display Logged user in the sidebar after connection successfully
+
+.Vente 
+    - Table:
+        - Proformat:
+            - id
+            - id_seller (for seller information)
+            - id_client (for client information)
+            - invoice date
+            - proforma invoice number (id + str)
+
+        - ProformaItems: 
+            - id_proforma
+            - id_item
+            - PK(id_proforma, id_item)

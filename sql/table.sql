@@ -86,3 +86,14 @@ CREATE TABLE product(
     quantity INTEGER NOT NULL,
     CHECK(quantity > 0)
 );
+
+-- Role
+CREATE TABLE Role (
+    id SERIAL PRIMARY KEY,
+    label VARCHAR(100) NOT NULL
+);
+
+-- Login
+CREATE TABLE Login (
+    
+);
