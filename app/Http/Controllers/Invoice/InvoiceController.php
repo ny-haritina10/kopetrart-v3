@@ -7,12 +7,23 @@ use Illuminate\Http\Request;
 
 use App\Models\Invoice\Invoice;
 use App\Models\Receipt\ReceiptNote;
+use App\Models\General\Exercice;
+use App\Models\General\ExerciceYear;
+
+use App\Services\Invoice\InvoiceService;
 
 class InvoiceController extends Controller
 {
     private $list_view = "pages.invoice.list";
     private $create_view = "pages.invoice.create";
     private $show_view = "pages.invoice.show";
+
+    private $invoicePaymentService;
+
+    public function __construct(InvoiceService $invoicePaymentService)
+    {
+        $this->invoicePaymentService = $invoicePaymentService;
+    }
 
     public function index()
     {
@@ -74,9 +85,16 @@ class InvoiceController extends Controller
     public function mark_as_paid($id)
     {
         $invoice = Invoice::findOrFail($id);
-        $invoice->update(['is_paid' => true]);
         
-        return redirect()->back()
-            ->with('success', 'La facture a été marquée comme payée');
+        try {
+            $this->invoicePaymentService->mark_as_paid($invoice);
+            return redirect()->back()
+                ->with('success', 'La facture a été marquée comme payée et les écritures comptables ont été créées');
+        } 
+        
+        catch (\Exception $e) {
+            return redirect()->back()
+                ->with('error', 'Erreur lors du traitement du paiement: ' . $e->getMessage());
+        }
     }
 }

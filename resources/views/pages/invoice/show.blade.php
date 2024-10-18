@@ -4,7 +4,20 @@
 <x-navbar.main active="/invoice"></x-navbar.main>
 @endsection
 
+
+
 @section('content')
+
+@if ($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+
 <div class="container mt-4">
     <h1 class="text-center mb-4">Facture</h1>
     

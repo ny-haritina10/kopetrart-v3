@@ -33,10 +33,10 @@ VENTE
 - Manager.validate(BonDeLivraison)
 - BonDeLivraison.send()
 - await getBonDeReceptionFrom(Customser)
-
 - Facture.createFrom(BonDeReception)
 - Manager.validate(Facture)
 - Facture.sendTo(Customer)
 - await getFacturePayementFrom(Customer)
 - Manager.validate(FacturePayement)
 - Cash.register(FaturePayment)
+	- ecriture

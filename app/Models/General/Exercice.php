@@ -13,6 +13,15 @@ class Exercice extends Model
     protected $table = 'exercice';
     public $timestamps = false;
 
+    protected $fillable = [
+        'no_account',
+        'id_exercice_year',
+        'label',
+        'debit',
+        'credit',
+        'date'
+    ];
+
     public static function list()
     {
         return DB::table('v_l_exercice')

@@ -206,3 +206,16 @@
             - id_proforma
             - id_item
             - PK(id_proforma, id_item)
+
+
+
+/* TO DO==================================== */
+- FIFO & LIFO
+
+- Chart
+
+- Ecriture
+    - compte stock
+
+- Achat 
+    - enchainement operation bon no manena sy mapitombo ny stock
