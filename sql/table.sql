@@ -87,13 +87,9 @@ CREATE TABLE product(
     CHECK(quantity > 0)
 );
 
--- Role
-CREATE TABLE Role (
+-- suppliers
+CREATE TABLE suppliers (
     id SERIAL PRIMARY KEY,
-    label VARCHAR(100) NOT NULL
-);
-
--- Login
-CREATE TABLE Login (
-    
+    name VARCHAR(100) NOT NULL,
+    contact_info VARCHAR(255)
 );

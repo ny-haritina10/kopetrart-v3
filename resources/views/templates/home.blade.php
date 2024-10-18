@@ -17,6 +17,8 @@
 
         <script type="text/javascript" src="/lib/mdb5/js/mdb.umd.min.js" defer></script>
         <script type="text/javascript" src="/src/js/script.js" defer></script>
+
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     </head>
     <body>
         <div id="container">

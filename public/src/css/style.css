@@ -12,7 +12,9 @@
   height: 100dvh;
   background-image: linear-gradient(#C6426E, #642B73);
   top: 0;
+  overflow-y: auto; 
 }
+
 .fx__navbar-brand {
   color: white;
   text-align: center;

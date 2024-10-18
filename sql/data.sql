@@ -33,7 +33,14 @@ INSERT INTO unit(label) VALUES('Unité'                );
 INSERT INTO center(label, id_center_type) VALUES('Artisanat', 2);
 INSERT INTO center(label, id_center_type) VALUES('Adm/Dist' , 1);
 
+-- Product 
 INSERT INTO product(label, quantity, id_unit) VALUES('Sac à main', 338000.0, 1);
+INSERT INTO product(label, quantity, id_unit) VALUES('Sac à main en cuir', 150000.0, 1);
+INSERT INTO product(label, quantity, id_unit) VALUES('Sac à main en toile', 120000.0, 1);
+INSERT INTO product(label, quantity, id_unit) VALUES('Sac à main de soirée', 80000.0, 1);
+INSERT INTO product(label, quantity, id_unit) VALUES('Sac à main vintage', 95000.0, 1);
+INSERT INTO product(label, quantity, id_unit) VALUES('Sac à main en daim', 110000.0, 1);
+
 -- Loyer
 INSERT INTO section(no_account, label, id_unit, id_nature, id_incorporation) 
 VALUES ('613', 'Loyer', 6, 2, 2);
@@ -181,7 +188,7 @@ VALUES ('6026', 1, 'Emballage', 0, 100000, '2024-09-30');
 INSERT INTO exercice(no_account, id_exercice_year, label, credit, debit, date)  
 VALUES ('626', 1, 'Frais de communication', 0, 100000, '2024-09-30');
 
-
+-- expense
 INSERT INTO expense(id_section, id_exercice, quantity, price, date) VALUES( 1,  1, 1,  1500000.0, '2024-09-20');
 INSERT INTO expense(id_section, id_exercice, quantity, price, date) VALUES( 2,  2, 1,  3000000.0, '2024-09-20');
 INSERT INTO expense(id_section, id_exercice, quantity, price, date) VALUES( 3,  3, 1,  5000000.0, '2024-09-20');
@@ -238,3 +245,19 @@ INSERT INTO expense_center(id_expense, id_center, percentage) VALUES(15, 2, 1.00
 INSERT INTO expense_center(id_expense, id_center, percentage) VALUES(16, 2,  .00);
 INSERT INTO expense_center(id_expense, id_center, percentage) VALUES(17, 2, 1.00);
 INSERT INTO expense_center(id_expense, id_center, percentage) VALUES(18, 2, 1.00);
+
+-- suppliers
+INSERT INTO suppliers (name, contact_info) VALUES 
+('Supplier A', 'contact@supplierone.com'),
+('Supplier B', 'support@suppliertwo.com'),
+('Supplier C', 'info@supplierthree.com'),
+('Supplier D', 'sales@supplierfour.com'),
+('Supplier E', 'hello@supplierfive.com');
+
+-- customers
+INSERT INTO customers (name, email) VALUES 
+('Alice Johnson', 'alice.johnson@example.com'),
+('Bob Smith', 'bob.smith@example.com'),
+('Charlie Brown', 'charlie.brown@example.com'),
+('Diana Prince', 'diana.prince@example.com'),
+('Ethan Hunt', 'ethan.hunt@example.com');

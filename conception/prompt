@@ -1,0 +1,1 @@
+given this table scheme, create me the Model, the Controller, the blade view and the Routes for a full CRUD operations in Laravel . Follow the example that i will give you for the view, don't forget the form validations and the displaying of any errors . The form for the create and update need to be the same . Here is the table scheme :

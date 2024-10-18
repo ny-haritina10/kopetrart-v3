@@ -19,4 +19,20 @@ class Product extends Model
                     ->select('id', 'label', 'quantity', 'id_unit', 'unit')
                     ->get();
     }
+
+    public static function get_unit_price(int $id) 
+    {
+        return DB::table('v_product_cost_unit')
+                ->select('price_unit')
+                ->where('id', '=', $id)
+                ->first(); 
+    }
+
+    public static function get_selling_price(int $id)
+    {
+        return DB::table('v_product_selling_price')
+                    ->select('selling_price')
+                    ->where('id', '=', $id)
+                    ->first();
+    }
 }

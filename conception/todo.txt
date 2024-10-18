@@ -20,7 +20,6 @@ ACHAT
 - Stock.withdraw(Demande)
 
 
-
 VENTE
 
 - await hasProformatAsked()
@@ -29,7 +28,7 @@ VENTE
 - Proformat.sendTo(Customer)
 - await getBonDeCommandeFrom(Customer)
 - Demande.create(BonDeCommande)
-- ... cf ACHAT
+- Stock.validate(BonDeCommande)
 - BonDeLivraison.createFor(Customer)
 - Manager.validate(BonDeLivraison)
 - BonDeLivraison.send()

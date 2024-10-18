@@ -303,3 +303,10 @@ GROUP BY
 /* ========================================== */
 /* ========================================== */
 /* ========================================== */
+
+CREATE OR REPLACE VIEW v_product_selling_price AS
+SELECT 
+    vpc.*,
+    vpc.price_unit * 1.2 AS selling_price
+FROM 
+    v_product_cost_unit vpc;

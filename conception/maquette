@@ -29,3 +29,158 @@ Email: janedoe@email.com
 | **Subtotal**               |              |                | **$575.00**     |
 | Shipping (Standard)        |              |                | $25.00          |
 | **Total Amount**           |              |                | **$600.00**     |
+
+
+
+
+# BON DE COMMANDE ======================================= #
+
+---
+
+### **BON DE COMMANDE**  
+**N° de commande:** 00125  
+**Date:** 17/10/2024  
+
+**Vendeur:**  
+Handbag Boutique  
+123 Rue de la Mode, 75001 Paris  
+Téléphone: +33 1 23 45 67 89  
+Email: contact@handbagboutique.fr  
+
+---
+
+**Acheteur:**  
+Nom: Sophie Dupont  
+Adresse: 45 Avenue des Champs-Élysées, 75008 Paris  
+Téléphone: +33 6 78 90 12 34  
+Email: sophie.dupont@example.com  
+
+---
+
+### **Détails de la commande:**
+
+| Réf. Produit | Description            | Quantité | Prix Unitaire (€) | Total (€) |
+|--------------|------------------------|----------|-------------------|-----------|
+| HB001        | Sac à main en cuir noir | 1        | 150.00            | 150.00    |
+| HB012        | Pochette en daim beige  | 1        | 80.00             | 80.00     |
+
+---
+
+**Sous-total:** 230.00 €  
+**Total à payer:** 276.00 €  
+
+---
+
+# STOCK , VENTE , ACHAT =================================================== #\
+
+### 1. **Tables Overview**
+- **Suppliers**: Information about the suppliers who provide handbags.
+- **Products**: Details about each handbag available in the store.
+- **Purchases**: Records of stock purchases from suppliers.
+- **Sales**: Records of sales to customers.
+- **Customers**: Information about customers who buy products.
+- **Stock**: Tracks the current stock levels for each product.
+
+---
+
+### 2. **Schema Design**
+
+#### **Suppliers Table**  
+Tracks suppliers who provide the handbags.
+
+| Column         | Data Type       | Description                  |
+|----------------|-----------------|------------------------------|
+| `id_supplier`  | INT (Primary Key, Auto Increment) | Unique identifier for each supplier |
+| `name`         | VARCHAR(100)    | Supplier name                |
+| `contact_info` | VARCHAR(255)    | Supplier contact details     |
+
+#### **Purchases Table**  
+Logs stock purchases from suppliers.
+
+| Column           | Data Type       | Description                  |
+|------------------|-----------------|------------------------------|
+| `id`    | INT (Primary Key, Auto Increment) | Unique identifier for each purchase |
+| `id_product`     | INT (Foreign Key) | Product being purchased      |
+| `id_supplier`    | INT (Foreign Key) | Supplier providing the product |
+| `quantity`       | INT             | Quantity of handbags purchased |
+| `purchase_date`  | DATE            | Date of purchase             |
+| `unit_cost`      | DECIMAL(10, 2)  | Cost per handbag purchased   |
+
+#### **Customers Table**  
+Stores information about the customers.
+
+| Column         | Data Type       | Description                  |
+|----------------|-----------------|------------------------------|
+| `id_customer`  | INT (Primary Key, Auto Increment) | Unique identifier for each customer |
+| `name`         | VARCHAR(100)    | Customer's name              |
+| `email`        | VARCHAR(100)    | Customer's email address     |
+
+#### **Sales Table**  
+Logs sales transactions.
+
+| Column         | Data Type       | Description                  |
+|----------------|-----------------|------------------------------|
+| `id`      | INT (Primary Key, Auto Increment) | Unique identifier for each sale |
+| `id_product`   | INT (Foreign Key) | Product sold                 |
+| `id_customer`  | INT (Foreign Key) | Customer buying the product  |
+| `quantity`     | INT             | Quantity sold                |
+| `sale_date`    | DATE            | Date of sale                 |
+| `sale_price`   | DECIMAL(10, 2)  | Price at which the handbag was sold |
+
+#### **Stock Table**  
+Tracks the current stock level for each product.
+
+| Column         | Data Type       | Description                  |
+|----------------|-----------------|------------------------------|
+| `id_product`   | INT (Foreign Key, Primary Key) | Unique identifier of the product |
+| `quantity` | INT        | Current quantity of handbags in stock |
+
+---
+
+### 3. **Relationships & Constraints**
+- `id_product` in the **Products**, **Purchases**, **Sales**, and **Stock** tables is a **Foreign Key** referencing the `id_product` in the **Products** table.
+- `id_supplier` in the **Purchases** table is a **Foreign Key** referencing the `id_supplier` in the **Suppliers** table.
+- `id_customer` in the **Sales** table is a **Foreign Key** referencing the `id_customer` in the **Customers** table.
+- The **Stock** table ensures that we can easily track current stock levels after each purchase and sale.
+
+---
+
+### 4. **Queries**
+
+1. **Track Stock Levels**:
+   ```sql
+   SELECT p.name, s.quantity
+   FROM Products p
+   JOIN Stock s ON p.id_product = s.id_product;
+   ```
+
+2. **Record a Purchase**:
+   When a new stock purchase is made, we need to update both the **Purchases** and **Stock** tables:
+   ```sql
+   INSERT INTO Purchases (id_product, id_supplier, quantity, purchase_date, unit_cost)
+   VALUES (1, 2, 50, '2024-10-17', 100.00);
+
+   UPDATE Stock
+   SET quantity = quantity + 50
+   WHERE id_product = 1;
+   ```
+
+3. **Record a Sale**:
+   When a sale happens, we need to log it in the **Sales** table and adjust the stock in the **Stock** table:
+   ```sql
+   INSERT INTO Sales (id_product, id_customer, quantity, sale_date, sale_price)
+   VALUES (1, 3, 2, '2024-10-17', 150.00);
+
+   UPDATE Stock
+   SET quantity = quantity - 2
+   WHERE id_product = 1;
+   ```
+
+4. **List of Sales for a Product**:
+   To view all sales for a specific product:
+   ```sql
+   SELECT s.id_sale, c.name, s.quantity, s.sale_price, s.sale_date
+   FROM Sales s
+   JOIN Customers c ON s.id_customer = c.id_customer
+   WHERE s.id_product = 1;
+   ```

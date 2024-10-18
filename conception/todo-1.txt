@@ -1,0 +1,208 @@
+- Features
+    - cout_total_general
+    - cout_total_direct
+    - cout_unitaire_entree
+    - cout_unitaire_sortie
+    - cout_par_centre
+
+- Tables
+    - unite(id, libelle)
+    - nature(id, libelle) { 'variable' , 'fixe'}
+    - corporabilite(id, libelle) { 'incorporable', 'non incorporable', 'suppletive' }
+    - rubrique(id, libelle, unite, nature, corporabilite)
+    - charge(id, rubrique, prix_total, quantite_total, date)
+    - centre(id, libelle)
+    - charge_centre(id, rubrique, centre, 0 <= pourcentage <= 1)
+    - produit(id, libelle, quantite)
+
+
+. CRUD Rubrique:
+    - Model:
+        - Unite:
+            - all() -> array<Unite>
+
+        - Nature:
+            - all() -> array<Nature>
+
+        - Corporabilite:
+            - all() -> array<Corporabilite>
+
+        - Rubrique:
+            - all() -> array<Rubrique>
+            - find($id) -> Rubrique
+            - create() -> any
+            - update() -> any
+            - delete() -> any
+    - View:
+        - rubrique-form:
+            - libelle: text
+            - unite: select(unite)
+            - nature: select(nature)
+            - corporabilite: select(corporabilite)
+            - button: submit
+
+        - rubrique-list:
+            - button-add
+            - table: 
+                - button-delete
+                - button-update
+                - libelle
+                - unite
+                - nature
+                - corporabilite
+
+    - Controller:
+        - RubriqueController
+            - index(): Model\Rubrique::all() -> View\rubrique-list
+            
+            - create(): View\rubrique-list.button-add -> (Model\Unite::all(), Model\Nature::all(), Model\Corporabilite::all()) -> View\rubrique-form
+            - store($request): View\rubrique-form.button -> Model\Rubrique::create()
+            
+            - edit($id): (Model\Rubrique::find($id), Model\Unite::all(), Model\Nature::all(), Model\Corporabilite::all()) -> View\rubrique-form
+            - update($request, $id): View\rubrique-form.button -> Model\Rubrique::update($id)
+            
+            - delete($id): View\rubrique-list.button-delete -> Model\Rubrique::delete($id)
+
+. CRUD Centre:
+    - Model:
+        - Centre:
+            - all() -> array<Centre>
+            - find($id) -> Centre
+            - create() -> any
+            - update() -> any
+            - delete() -> any
+    - View:
+        - centre-form:
+            - libelle: text
+            - button: submit
+
+        - centre-list:
+            - button-add
+            - table: 
+                - button-delete
+                - button-update
+                - libelle
+
+    - Controller:
+        - CentreController
+            - index(): Model\Centre::all() -> View\centre-list
+            
+            - create(): View\centre-list.button-add -> View\centre-form
+            - store($request): View\centre-form.button -> Model\Centre::create()
+            
+            - edit($id): View\centre-list.button-update -> Model\Centre::find($id) -> View\centre-form
+            - update($request, $id): View\centre-form.button -> Model\Centre::update($id)
+
+            - delete($id): View\centre-list.button-delete -> Model\Centre::delete($id)
+
+
+. CRUD Charge:
+    - Model:
+        - ChargeCentre:
+            - find($id_centre) -> array<ChargeCentre>
+            - create() -> any
+            - delete() -> any
+
+        - Charge:
+            - all() -> array<Charge>
+            - find($id) -> Charge
+            - create() -> any
+            - update() -> any
+            - delete() -> any
+    - View:
+        - charge-form:
+            - rubrique: select
+            - prix_total: number(.01) # 2 chiffres après virgule
+            - quantite_total: number(?) # tsy aiko oe atao firy chiffre après virgule le izy satri arakarak le quantité
+            - date: date
+            - charge-centre: [
+                # somary fay eto a
+                centre1: number(.01) 0 to 100 # entre 0 et 100 inclusif
+                centre2: number(.01) 0 to 100 # entre 0 et 100 inclusif
+                centre3...
+            ]
+            - button: submit
+
+        - charge-list:
+            - button-add
+            - cf tableau principal ANALYTIQUES
+                - button-delete
+                - button-update
+
+    - Controller:
+        - ChargeController
+            - index(): Model\Charge::all() -> View\charge-list
+            
+            - create(): View\charge-list.button-add -> (Model\Rubrique::all(), Model\Centre::all()) -> View\charge-form
+            - store($request): View\charge-form.button -> (Model\Charge::create(), Mode\ChargeCentre::create())
+            
+            - edit($id): View\charge-list.button-update -> Model\Centre::find($id) -> View\centre-form
+            - update($request, $id): View\centre-form.button -> (Model\Centre::update($id), Mode\ChargeCentre::delete(), Mode\ChargeCentre::create())
+            
+            - delete($id): View\charge-list.button-delete -> (Model\Centre::delete($id), Mode\ChargeCentre::delete())
+
+. Couts:
+    - Model:
+        - CoutModel:
+            - get_total_general($id_limit_centre) -> number
+            - get_total_direct($id_limit_centre) -> number
+            - get_unitaire_sortie($id_limit_centre) -> number
+            - get_unitaire_rubrique() -> array<{ rubrique, prix_unitaire, prix_total, quantite_total }>
+
+    - View:
+        cout
+            - filtre:
+                - rubrique: select
+            - card: cout-total-general
+            - card: cout-total-direct
+            - card: cout-unitaire-sortie
+            - table:
+                - rubrique
+                - prix unitaire
+                - prix-total
+                - quantite-total
+
+    - Controller:
+        - index(): all functions in Model\CoutModel -> View\cout
+
+
+/* TO DO SUJET II ==================================== */
+
+. Controles Internes
+    - Table: 
+        - Role: 
+            - id
+            - label
+
+        - Login:
+            - id
+            - id_role [FK]
+            - email
+            - password
+
+    - Model: 
+        - Role
+            - CRUD 
+        - Login  
+            - check(email, password)
+                - encrypt password
+
+    - View: 
+        - Login form (email, password)
+        - Form validation 
+        - Error handling
+        - Display Logged user in the sidebar after connection successfully
+
+.Vente 
+    - Table:
+        - Proformat:
+            - id
+            - id_seller (for seller information)
+            - id_client (for client information)
+            - invoice date
+            - proforma invoice number (id + str)
+
+        - ProformaItems: 
+            - id_proforma
+            - id_item
+            - PK(id_proforma, id_item)

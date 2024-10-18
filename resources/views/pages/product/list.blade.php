@@ -15,7 +15,6 @@
 <x-table>
     <thead>
         <th> Actions </th>
-
         <th> Libellé </th>
         <th> Unité d'oeuvre </th>
         <th> Quantité </th>
