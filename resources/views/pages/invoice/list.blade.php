@@ -1,13 +1,13 @@
 @extends('templates.home')
 
 @section('aside')
-<x-navbar.main active="/receipt_notes"></x-navbar.main>
+<x-navbar.main active="/invoice"></x-navbar.main>
 @endsection
 
 @section('content')
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2>Liste des Bons de Réception</h2>
+        <h2>Liste des Factures</h2>
     </div>
 
     @if(session('success'))
@@ -17,58 +17,51 @@
     @endif
 
     <div class="card">
-        <div class="card-body"> 
+        <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-hover">
                     <thead class="thead-light">
                         <tr>
-                            <th>N° Réception</th>
-                            <th>N° Livraison</th>
-                            <th>N° Commande</th>
+                            <th>N° Facture</th>
                             <th>Client</th>
-                            <th>Date de Réception</th>
+                            <th>Date Facture</th>
+                            <th>Montant Total</th>
                             <th>Statut</th>
-                            <th>Facture</th>
+                            <th>Date Échéance</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse($receipt_notes as $receipt_note)
+                        @forelse($invoices as $invoice)
                             <tr>
-                                <td>{{ $receipt_note->receipt_number }}</td>
-                                <td>{{ $receipt_note->deliveryNote->delivery_number }}</td>
-                                <td>{{ $receipt_note->deliveryNote->purchaseOrder->order_number }}</td>
-                                <td>{{ $receipt_note->deliveryNote->purchaseOrder->buyer_name }}</td>
-                                <td>{{ $receipt_note->receipt_date->format('d/m/Y') }}</td>
+                                <td>{{ $invoice->invoice_number }}</td>
+                                <td>{{ $invoice->receiptNote->deliveryNote->purchaseOrder->buyer_name }}</td>
+                                <td>{{ $invoice->invoice_date->format('d/m/Y') }}</td>
+                                <td>{{ number_format($invoice->total_amount, 2) }} €</td>
                                 <td>
-                                    @if($receipt_note->is_signed)
-                                        <span class="badge bg-success">Signé</span>
+                                    @if($invoice->is_paid)
+                                        <span class="badge bg-success">Payée</span>
                                     @else
                                         <span class="badge bg-warning">En attente</span>
                                     @endif
                                 </td>
-                                <td>
-                                    <a href="{{ route('invoice.create', $receipt_note->id) }}" 
-                                        class="btn btn-info btn-sm">
-                                        <i class="fas fa-file-invoice"></i> Facturé  
-                                    </a>
-                                </td>
+                                <td>{{ $invoice->payment_due_date->format('d/m/Y') }}</td>
                                 <td>
                                     <div class="btn-group" role="group">
-                                        <a href="{{ route('receipt_note.show', $receipt_note->id) }}" 
+                                        <a href="{{ route('invoice.show', $invoice->id) }}" 
                                            class="btn btn-info btn-sm">
                                             <i class="fas fa-eye"></i> Voir
                                         </a>
-
-                                        @if(!$receipt_note->is_signed)
-                                            <form action="{{ route('receipt_note.sign', $receipt_note->id) }}" 
+                                        
+                                        @if(!$invoice->is_paid)
+                                            <form action="{{ route('invoice.mark_paid', $invoice->id) }}" 
                                                   method="POST" 
                                                   class="d-inline">
                                                 @csrf
                                                 <button type="submit" 
                                                         class="btn btn-success btn-sm"
-                                                        onclick="return confirm('Êtes-vous sûr de vouloir signer ce bon de réception?')">
-                                                    <i class="fas fa-signature"></i> Signer
+                                                        onclick="return confirm('Confirmer le paiement de cette facture?')">
+                                                    <i class="fas fa-check"></i> Marquer payée
                                                 </button>
                                             </form>
                                         @endif
@@ -78,7 +71,7 @@
                         @empty
                             <tr>
                                 <td colspan="7" class="text-center">
-                                    Aucun bon de réception trouvé
+                                    Aucune facture trouvée
                                 </td>
                             </tr>
                         @endforelse
@@ -89,15 +82,3 @@
     </div>
 </div>
 @endsection
-
-@push('styles')
-<style>
-    .table td, .table th {
-        vertical-align: middle;
-    }
-    
-    .btn-group {
-        gap: 0.25rem;
-    }
-</style>
-@endpush

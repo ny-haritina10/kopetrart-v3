@@ -63,6 +63,15 @@
             </x-navbar.item>
         </ul>
     </div>
+
+    <div class="fx__navbar-section">
+        <h3 class="fx__navbar-subtitle"> Facture </h3>
+        <ul class="fx__navbar-list">
+            <x-navbar.item href="{{ route('invoice.index') }}" :active="$active"> 
+                <i class="fas fa-clipboard-list"></i>Liste factures  
+            </x-navbar.item>
+        </ul>
+    </div>
     
     <div class="fx__navbar-section">
         <h3 class="fx__navbar-subtitle"> Achat </h3>

@@ -19,6 +19,7 @@ use App\Http\Controllers\Sale\SaleController;
 use App\Http\Controllers\Stock\StockController;
 use App\Http\Controllers\Delivery\DeliveryNoteController;
 use App\Http\Controllers\Receipt\ReceiptNoteController;
+use App\Http\Controllers\Invoice\InvoiceController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -64,3 +65,11 @@ Route::prefix('receipt-note')->group(function () {
     Route::get('/show/{id}', [ReceiptNoteController::class, 'show'])->name('receipt_note.show');
     Route::post('/sign/{id}', [ReceiptNoteController::class, 'sign'])->name('receipt_note.sign');
 });     
+
+Route::prefix('invoice')->group(function () {
+    Route::get('/', [InvoiceController::class, 'index'])->name('invoice.index');
+    Route::get('/create/{id_receipt_note}', [InvoiceController::class, 'create'])->name('invoice.create');
+    Route::post('/store/{id_receipt_note}', [InvoiceController::class, 'store'])->name('invoice.store');
+    Route::get('/show/{id}', [InvoiceController::class, 'show'])->name('invoice.show');
+    Route::post('/mark-paid/{id}', [InvoiceController::class, 'mark_as_paid'])->name('invoice.mark_paid');
+});
