@@ -31,19 +31,31 @@
         <th>Date</th>
         <th>Nom de l'Acheteur</th>
         <th>Montant Total</th>
+        <th>Statut</th>
     </thead>
 
     <tbody>
         @foreach ($orders as $order)
             <tr>
                 <td>
-                    <x-button.show href="{{ route('purchase_order.show', $order->id) }}"> Consulter </x-button.show>
-                    <x-button.accept href="{{ route('purchase_order.validate', $order->id) }}"> Valider </x-button.accept>
+                    <x-button.show href="{{ route('purchase_order.show', $order->id) }}">Consulter</x-button.show>
+                    @if (!$order->is_validated)
+                        <x-button.accept href="{{ route('purchase_order.validate', $order->id) }}">Valider</x-button.accept>
+                    @else
+                        <x-button.accept href="{{ route('delivery_note.create', $order->id) }}">Bon de Livraison</x-button.accept>                    
+                    @endif
                 </td>
                 <td>{{ $order->order_number }}</td>
                 <td>{{ $order->order_date->format('Y-m-d') }}</td>
                 <td>{{ $order->buyer_name }}</td>
                 <td>{{ number_format($order->total_amount, 2) }} €</td>
+                <td>
+                    @if ($order->is_validated)
+                        <span class="badge bg-success">Validé</span>
+                    @else
+                        <span class="badge bg-warning">En attente</span>
+                    @endif
+                </td>
             </tr>
         @endforeach
     </tbody>

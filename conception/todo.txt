@@ -32,6 +32,8 @@ VENTE
 - BonDeLivraison.createFor(Customer)
 - Manager.validate(BonDeLivraison)
 - BonDeLivraison.send()
+
+
 - await getBonDeReceptionFrom(Customer)
 - Facture.createFrom(BonDeReception)
 - Manager.validate(Facture)

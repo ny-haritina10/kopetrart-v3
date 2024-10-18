@@ -18,6 +18,7 @@ class PurchaseOrder extends Model
         'buyer_phone',
         'buyer_email',
         'total_amount',
+        'is_validated'
     ];
 
     protected $casts = [

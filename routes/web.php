@@ -17,6 +17,8 @@ use App\Http\Controllers\Purchase\PurchaseOrderController;
 use App\Http\Controllers\Purchase\PurchaseController;
 use App\Http\Controllers\Sale\SaleController;
 use App\Http\Controllers\Stock\StockController;
+use App\Http\Controllers\Delivery\DeliveryNoteController;
+use App\Http\Controllers\Receipt\ReceiptNoteController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -48,3 +50,17 @@ Route::get('/purchase_order/validate/{id}', [ PurchaseOrderController::class, 'v
 Route::resource('purchases', PurchaseController::class);
 Route::resource('sales', SaleController::class);
 Route::resource('stocks', StockController::class);
+
+Route::get('/delivery-note/create/{purchase_order}', [DeliveryNoteController::class, 'create'])->name('delivery_note.create');
+Route::post('/delivery-note/{purchase_order}', [DeliveryNoteController::class, 'store'])->name('delivery_note.store');
+Route::get('/delivery-note/{id}', [DeliveryNoteController::class, 'show'])->name('delivery_note.show');
+Route::get('/delivery-note', [DeliveryNoteController::class, 'index'])->name('delivery_note.index');
+Route::get('/delivery-note/{id}/send', [DeliveryNoteController::class, 'send'])->name('delivery_note.send');
+
+Route::prefix('receipt-note')->group(function () {
+    Route::get('/', [ReceiptNoteController::class, 'index'])->name('receipt_note.index');
+    Route::get('/create/{id_delivery_note}', [ReceiptNoteController::class, 'create'])->name('receipt_note.create');
+    Route::post('/store/{id_delivery_note}', [ReceiptNoteController::class, 'store'])->name('receipt_note.store');
+    Route::get('/show/{id}', [ReceiptNoteController::class, 'show'])->name('receipt_note.show');
+    Route::post('/sign/{id}', [ReceiptNoteController::class, 'sign'])->name('receipt_note.sign');
+});     

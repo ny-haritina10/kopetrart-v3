@@ -38,10 +38,28 @@
         <h3 class="fx__navbar-subtitle"> Bon de commande </h3>
         <ul class="fx__navbar-list">
             <x-navbar.item href="{{ route('purchase_order.create') }}" :active="$active"> 
-                <i class="fas fa-file-signature"></i> Création bon de commande 
+                <i class="fas fa-file-signature"></i>Création bon de commande 
             </x-navbar.item>
             <x-navbar.item href="{{ route('purchase_order.index') }}" :active="$active"> 
-                <i class="fas fa-clipboard-list"></i> Liste bon de commande  
+                <i class="fas fa-clipboard-list"></i>Liste bon de commande  
+            </x-navbar.item>
+        </ul>
+    </div>
+
+    <div class="fx__navbar-section">
+        <h3 class="fx__navbar-subtitle"> Bon de livraison </h3>
+        <ul class="fx__navbar-list">
+            <x-navbar.item href="{{ route('delivery_note.index') }}" :active="$active"> 
+                <i class="fas fa-clipboard-list"></i>Liste bon de livraison  
+            </x-navbar.item>
+        </ul>
+    </div>
+
+    <div class="fx__navbar-section">
+        <h3 class="fx__navbar-subtitle"> Bon de réception </h3>
+        <ul class="fx__navbar-list">
+            <x-navbar.item href="{{ route('receipt_note.index') }}" :active="$active"> 
+                <i class="fas fa-clipboard-list"></i>Liste bon de réception  
             </x-navbar.item>
         </ul>
     </div>
@@ -50,10 +68,10 @@
         <h3 class="fx__navbar-subtitle"> Achat </h3>
         <ul class="fx__navbar-list">
             <x-navbar.item href="{{ route('purchases.create') }}" :active="$active"> 
-                <i class="fas fa-shopping-cart"></i> Achat produit 
+                <i class="fas fa-shopping-cart"></i>Achat produit 
             </x-navbar.item>
             <x-navbar.item href="{{ route('purchases.index') }}" :active="$active"> 
-                <i class="fas fa-list"></i> Liste achat  
+                <i class="fas fa-list"></i>Liste achat  
             </x-navbar.item>
         </ul>
     </div>
@@ -62,10 +80,10 @@
         <h3 class="fx__navbar-subtitle"> Vente </h3>
         <ul class="fx__navbar-list">
             <x-navbar.item href="{{ route('sales.create') }}" :active="$active"> 
-                <i class="fas fa-cash-register"></i> Vente produit 
+                <i class="fas fa-cash-register"></i>Vente produit 
             </x-navbar.item>
             <x-navbar.item href="{{ route('sales.index') }}" :active="$active"> 
-                <i class="fas fa-receipt"></i> Liste vente  
+                <i class="fas fa-receipt"></i>Liste vente  
             </x-navbar.item>
         </ul>
     </div>
@@ -74,13 +92,13 @@
         <h3 class="fx__navbar-subtitle"> Stock </h3>
         <ul class="fx__navbar-list">
             <x-navbar.item href="{{ route('stocks.create') }}" :active="$active"> 
-                <i class="fas fa-box"></i> Stock initial 
+                <i class="fas fa-box"></i>Stock initial 
             </x-navbar.item>
         </ul>
 
         <ul class="fx__navbar-list">
             <x-navbar.item href="{{ route('stocks.index') }}" :active="$active"> 
-                <i class="fas fa-warehouse"></i> Etat de stock 
+                <i class="fas fa-warehouse"></i>Etat de stock 
             </x-navbar.item>
         </ul>
     </div>
