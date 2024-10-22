@@ -29,10 +29,18 @@ class UserSeeder extends Seeder
         //     'id_role' => 4
         // ]);
 
+        // User::create([
+        //     'name' => 'manager',
+        //     'email' => 'manager@gmail.com',
+        //     'password' => Hash::make('manager'),
+        //     'id_role' => 5
+        // ]);
+
+
         User::create([
-            'name' => 'manager',
-            'email' => 'manager@gmail.com',
-            'password' => Hash::make('manager'),
+            'name' => 'secretaire',
+            'email' => 'secretaire@gmail.com',
+            'password' => Hash::make('secretaire'),
             'id_role' => 5
         ]);
     }

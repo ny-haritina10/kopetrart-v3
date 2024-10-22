@@ -28,6 +28,7 @@
     <thead>
         <th>Actions</th>
         <th>Numéro de Commande</th>
+        <th>Type</th>
         <th>Date</th>
         <th>Nom de l'Acheteur</th>
         <th>Montant Total</th>
@@ -46,6 +47,7 @@
                     @endif
                 </td>
                 <td>{{ $order->order_number }}</td>
+                <td>{{ $order->type }}</td>
                 <td>{{ $order->order_date->format('Y-m-d') }}</td>
                 <td>{{ $order->buyer_name }}</td>
                 <td>{{ number_format($order->total_amount, 2) }} €</td>

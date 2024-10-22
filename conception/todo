@@ -210,12 +210,24 @@
 
 
 /* TO DO==================================== */
-- FIFO & LIFO
 
-- Chart
-
-- Ecriture
-    - compte stock
-
-- Achat 
+- Achat sy Vente (DONE)
     - enchainement operation bon no manena sy mapitombo ny stock
+    - supprimer Purchase sy Sale 
+    - bon achat ? bon vente ?
+
+
+- Bon de commande (put a checkbox) (DONE)
+    - BC d'achat ?
+        * Stock ++
+        * Ecriture
+        
+    - BD de vente ?
+        * Stock --
+        * Ecriture
+
+
+- FIFO & LIFO
+- Ecriture
+    - compte stock 37
+- Chart

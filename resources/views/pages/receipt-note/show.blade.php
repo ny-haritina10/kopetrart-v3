@@ -10,24 +10,47 @@
     
     <!-- Seller and Buyer Information -->
     <div class="row mb-4">
-        <div class="col-md-6">
-            <h4>Vendeur</h4>
-            <p>
-                Handbag Boutique<br>
-                123 Rue de la Mode, 75001 Paris<br>
-                Téléphone: +33 1 23 45 67 89<br>
-                Email: contact@handbagboutique.fr
-            </p>
-        </div>
-        <div class="col-md-6 text-md-right">
-            <h4>Acheteur</h4>
-            <p>
-                {{ $receipt_note->deliveryNote->purchaseOrder->buyer_name }}<br>
-                {{ $receipt_note->deliveryNote->purchaseOrder->buyer_address }}<br>
-                Téléphone: {{ $receipt_note->deliveryNote->purchaseOrder->buyer_phone }}<br>
-                Email: {{ $receipt_note->deliveryNote->purchaseOrder->buyer_email }}
-            </p>
-        </div>
+        @if ($receipt_note->deliveryNote->purchaseOrder->type === 'VENTE')
+            <div class="col-md-6">
+                <h4>Vendeur</h4>
+                    <p>
+                        Kopetrart Company Inc.<br>
+                        Andoharanofotsy Lot II Bis TR, Tana 101<br>
+                        Téléphone: +33 123 45 67 89<br>
+                        Email: kopetart.company@gmail.com
+                    </p>    
+                </div>
+            <div class="col-md-6 text-md-right">
+                <h4>Acheteur</h4>
+                <h4>Acheteur</h4>
+                <p>
+                    {{ $receipt_note->deliveryNote->purchaseOrder->buyer_name }}<br>
+                    {{ $receipt_note->deliveryNote->purchaseOrder->buyer_address }}<br>
+                    Téléphone: {{ $receipt_note->deliveryNote->purchaseOrder->buyer_phone }}<br>
+                    Email: {{ $receipt_note->deliveryNote->purchaseOrder->buyer_email }}
+                </p>
+            </div>
+        @elseif ($receipt_note->deliveryNote->purchaseOrder->type === 'ACHAT')
+            <div class="col-md-6">
+                <h4>Vendeur</h4>
+                    <p>
+                        Fournisseurs Sac de Luxe Company<br>
+                        Behoririka, Tana 101<br>
+                        Téléphone: +34 65 477 33<br>
+                        Email: fournisseurs.company@gmail.com
+                    </p>    
+                
+            </div>
+            <div class="col-md-6 text-md-right">
+                <h4>Acheteur</h4>
+                <p>
+                    Kopetrart Company Inc.<br>
+                    Andoharanofotsy Lot II Bis TR, Tana 101<br>
+                    Téléphone: +33 123 45 67 89<br>
+                    Email: kopetart.company@gmail.com
+                </p>    
+            </div>
+        @endif
     </div>
 
     <!-- Receipt Details -->

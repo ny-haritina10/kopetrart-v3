@@ -49,13 +49,16 @@ class PurchaseOrderController extends Controller
             'product' => 'required|array|min:1',
             'product.*.id' => 'required|exists:product,id',
             'product.*.quantity' => 'required|integer|min:1',
+            'type' => 'required|in:VENTE,ACHAT' 
         ]);
 
+        // Store the purchase order with type
         $order = $this->purchase_order_service->create_order($validated);
 
         return redirect()->route('purchase_order.show', $order->id)
             ->with('success', 'Purchase Order created successfully');
     }
+
 
     public function show(int $id)
     {
@@ -66,13 +69,18 @@ class PurchaseOrderController extends Controller
     public function validate(int $id)
     {
         $order = PurchaseOrder::findOrFail($id);
-        $insufficient_stock = $this->purchase_order_service->validate_stock($order);
-        
-        if (!empty($insufficient_stock)) {
-            $error_message = $this->format_insufficient_stock_message($insufficient_stock);
-            return redirect()->back()
-                ->with('error', $error_message)
-                ->with('info', 'A Proforma invoice has been created for the insufficient items.');
+
+        // check stock if it's a sale
+        if ($order->type === 'VENTE')
+        {
+            $insufficient_stock = $this->purchase_order_service->validate_stock($order);
+            
+            if (!empty($insufficient_stock)) {
+                $error_message = $this->format_insufficient_stock_message($insufficient_stock);
+                return redirect()->back()
+                    ->with('error', $error_message)
+                    ->with('info', 'A Proforma invoice has been created for the insufficient items.');
+            }
         }
 
         $order->update(['is_validated' => true]);
@@ -80,6 +88,7 @@ class PurchaseOrderController extends Controller
         return redirect()->back()
             ->with('success', 'Stock validation successful. All items are available.');
     }
+
     private function format_insufficient_stock_message(array $insufficient_stock): string
     {
         $message = "Insufficient stock for the following items:\n";

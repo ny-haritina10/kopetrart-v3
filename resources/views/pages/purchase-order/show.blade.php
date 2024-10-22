@@ -10,24 +10,46 @@
     
     <!-- Order Information -->
     <div class="row mb-4">
-        <div class="col-md-6">
-            <h4>Vendeur</h4>
-            <p>
-                Handbag Boutique<br>
-                123 Rue de la Mode, 75001 Paris<br>
-                Téléphone: +33 123 45 67 89<br>
-                Email: contact@handbagboutique.fr
-            </p>
-        </div>
-        <div class="col-md-6 text-md-right">
-            <h4>Acheteur</h4>
-            <p>
-                {{ $purchase_order->buyer_name }}<br>
-                {{ $purchase_order->buyer_address }}<br>
-                Téléphone: {{ $purchase_order->buyer_phone }}<br>
-                Email: {{ $purchase_order->buyer_email }}
-            </p>
-        </div>
+        @if ($purchase_order->type === 'VENTE')
+            <div class="col-md-6">
+                <h4>Vendeur</h4>
+                    <p>
+                        Kopetrart Company Inc.<br>
+                        Andoharanofotsy Lot II Bis TR, Tana 101<br>
+                        Téléphone: +33 123 45 67 89<br>
+                        Email: kopetart.company@gmail.com
+                    </p>    
+                </div>
+            <div class="col-md-6 text-md-right">
+                <h4>Acheteur</h4>
+                <p>
+                    {{ $purchase_order->buyer_name }}<br>
+                    {{ $purchase_order->buyer_address }}<br>
+                    Téléphone: {{ $purchase_order->buyer_phone }}<br>
+                    Email: {{ $purchase_order->buyer_email }}
+                </p>
+            </div>
+        @elseif ($purchase_order->type === 'ACHAT')
+            <div class="col-md-6">
+                <h4>Vendeur</h4>
+                    <p>
+                        Fournisseurs Sac de Luxe Company<br>
+                        Behoririka, Tana 101<br>
+                        Téléphone: +34 65 477 33<br>
+                        Email: fournisseurs.company@gmail.com
+                    </p>    
+                
+            </div>
+            <div class="col-md-6 text-md-right">
+                <h4>Acheteur</h4>
+                <p>
+                    Kopetrart Company Inc.<br>
+                    Andoharanofotsy Lot II Bis TR, Tana 101<br>
+                    Téléphone: +33 123 45 67 89<br>
+                    Email: kopetart.company@gmail.com
+                </p>    
+            </div>
+        @endif
     </div>
 
     <!-- Order Details -->
@@ -35,8 +57,12 @@
         <div class="col-md-6">
             <strong>N° de commande:</strong> {{ $purchase_order->order_number }}
         </div>
+        
         <div class="col-md-6 text-md-right">
             <strong>Date:</strong> {{ $purchase_order->order_date->format('d/m/Y') }}
+        </div>
+        <div class="col-md-6">
+            <strong>Type:</strong> {{ $purchase_order->type }}
         </div>
     </div>
 

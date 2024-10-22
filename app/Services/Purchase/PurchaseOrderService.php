@@ -25,6 +25,7 @@ class PurchaseOrderService
             'buyer_address' => $data['buyer_address'],
             'buyer_phone' => $data['buyer_phone'],
             'buyer_email' => $data['buyer_email'],
+            'type' => $data['type'],
             'total_amount' => 0,
         ]);
 

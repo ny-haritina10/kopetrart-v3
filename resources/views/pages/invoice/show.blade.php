@@ -4,9 +4,17 @@
 <x-navbar.main active="/invoice"></x-navbar.main>
 @endsection
 
-
-
 @section('content')
+
+@if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@elseif(session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
 
 @if ($errors->any())
 <div class="alert alert-danger">
@@ -20,27 +28,48 @@
 
 <div class="container mt-4">
     <h1 class="text-center mb-4">Facture</h1>
-    
     <!-- Seller and Buyer Information -->
     <div class="row mb-4">
-        <div class="col-md-6">
-            <h4>Vendeur</h4>
-            <p>
-                Handbag Boutique<br>
-                123 Rue de la Mode, 75001 Paris<br>
-                Téléphone: +33 1 23 45 67 89<br>
-                Email: contact@handbagboutique.fr
-            </p>
-        </div>
-        <div class="col-md-6 text-md-right">
-            <h4>Acheteur</h4>
-            <p>
-                {{ $invoice->receiptNote->deliveryNote->purchaseOrder->buyer_name }}<br>
-                {{ $invoice->receiptNote->deliveryNote->purchaseOrder->buyer_address }}<br>
-                Téléphone: {{ $invoice->receiptNote->deliveryNote->purchaseOrder->buyer_phone }}<br>
-                Email: {{ $invoice->receiptNote->deliveryNote->purchaseOrder->buyer_email }}
-            </p>
-        </div>
+        @if ($invoice->receiptNote->deliveryNote->purchaseOrder->type === 'VENTE')
+            <div class="col-md-6">
+                <h4>Vendeur</h4>
+                    <p>
+                        Kopetrart Company Inc.<br>
+                        Andoharanofotsy Lot II Bis TR, Tana 101<br>
+                        Téléphone: +33 123 45 67 89<br>
+                        Email: kopetart.company@gmail.com
+                    </p>    
+                </div>
+            <div class="col-md-6 text-md-right">
+                <h4>Acheteur</h4>
+                <p>
+                    {{ $invoice->receiptNote->deliveryNote->purchaseOrder->buyer_name }}<br>
+                    {{ $invoice->receiptNote->deliveryNote->purchaseOrder->buyer_address }}<br>
+                    Téléphone: {{ $invoice->receiptNote->deliveryNote->purchaseOrder->buyer_phone }}<br>
+                    Email: {{ $invoice->receiptNote->deliveryNote->purchaseOrder->buyer_email }}
+                </p>
+            </div>
+        @elseif ($invoice->receiptNote->deliveryNote->purchaseOrder->type === 'ACHAT')
+            <div class="col-md-6">
+                <h4>Vendeur</h4>
+                    <p>
+                        Fournisseurs Sac de Luxe Company<br>
+                        Behoririka, Tana 101<br>
+                        Téléphone: +34 65 477 33<br>
+                        Email: fournisseurs.company@gmail.com
+                    </p>    
+                
+            </div>
+            <div class="col-md-6 text-md-right">
+                <h4>Acheteur</h4>
+                <p>
+                    Kopetrart Company Inc.<br>
+                    Andoharanofotsy Lot II Bis TR, Tana 101<br>
+                    Téléphone: +33 123 45 67 89<br>
+                    Email: kopetart.company@gmail.com
+                </p>    
+            </div>
+        @endif
     </div>
 
     <!-- Invoice Details -->

@@ -19,7 +19,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('delivery_notes', function (Blueprint $table) {
-            $table->dropColumn('is_sent');
+            $table->dropColumn(columns: 'is_sent');
         });
     }
 };

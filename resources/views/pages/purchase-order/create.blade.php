@@ -51,6 +51,20 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
+                    <div class="form-group mt-3">
+                        <label for="order_type">Type de commande :</label><br>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="type" id="vente" value="VENTE" required>
+                            <label class="form-check-label" for="vente">VENTE</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="type" id="achat" value="ACHAT" required>
+                            <label class="form-check-label" for="achat">ACHAT</label>
+                        </div>
+                        @error('type')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
                 </div>
             </div>
 
